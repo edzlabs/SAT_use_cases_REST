@@ -35,12 +35,13 @@ async function scenario() {
 
     try {
 
-        //create buyer and send money to enable him to send transactions
+        //create buyer and send money to enable him to send transactions 
+        //note: in this example, Seller is sending money but it is not necessary to send from Seller, but just from any user (including Treasury account).
         let buyer = await createUser();
         debug("buyer has been created: %o", buyer);
         let sellerBalanceAfter = await sendMoney(SELLER.userId, SELLER.prvKey, buyer.userId, 11000);//10000 buyer fee + 1000 zfee
 
-        //list own sats
+        //list owned sats
         let sats = await listSats(SELLER.userId, 0, 1);
 
         //just choose first sat and its original dab

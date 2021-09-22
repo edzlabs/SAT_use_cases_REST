@@ -23,5 +23,5 @@
 const api = require("./api");
 
 module.exports = async () => {
-    return await api._post("/users/create");
+    return await api.post("/users/create");
 };

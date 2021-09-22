@@ -24,6 +24,6 @@ FUNCTIONS:
 * getTicket     ./samples_rest/GetViewingTicket_sample
 * downloadFile  ./samples_rest/DownloadFile_sample
 
-## Notes:
+## Notes
 * The blockchain ID and credentials in the config.json are for illustrative purposes only. Please insert your own data in this file (to replace the sample data) in order to enable the sample code to work.
 * Please reference the PDS Documentation Library found at https://docs.dase.io for more detailed information.

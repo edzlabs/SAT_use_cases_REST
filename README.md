@@ -1,6 +1,7 @@
 # SAT_use_cases_REST
 #
  Personal Digital Spaces LLC ("COMPANY") CONFIDENTIAL
+ 
  Unpublished Copyright (c) 2021 Personal Digital Spaces LLC, All Rights Reserved.
  
  NOTICE:  All information contained herein is, and remains the property of COMPANY. The intellectual and technical concepts contained
@@ -10,7 +11,8 @@
  Confidentiality and Non-disclosure agreements explicitly covering such access.
  
  The copyright notice above does not evidence any actual or intended publication or disclosure  of  this source code, which includes  
- information that is confidential and/or proprietary, and is a trade secret, of  COMPANY.   ANY REPRODUCTION, MODIFICATION, DISTRIBUTION, PUBLIC  PERFORMANCE, 
+ information that is confidential and/or proprietary, and is a trade secret, of  COMPANY.
+ 
+ ANY REPRODUCTION, MODIFICATION, DISTRIBUTION, PUBLIC  PERFORMANCE, 
  OR PUBLIC DISPLAY OF OR THROUGH USE  OF THIS  SOURCE CODE  WITHOUT  THE EXPRESS WRITTEN CONSENT OF COMPANY IS STRICTLY PROHIBITED, AND IN VIOLATION OF APPLICABLE 
- LAWS AND INTERNATIONAL TREATIES.  THE RECEIPT OR POSSESSION OF  THIS SOURCE CODE AND/OR RELATED INFORMATION DOES NOT CONVEY OR IMPLY ANY RIGHTS  
- TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING THAT IT  MAY DESCRIBE, IN WHOLE OR IN PART.
+ LAWS AND INTERNATIONAL TREATIES.  THE RECEIPT OR POSSESSION OF  THIS SOURCE CODE AND/OR RELATED INFORMATION DOES NOT CONVEY OR IMPLY ANY RIGHTS TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING THAT IT  MAY DESCRIBE, IN WHOLE OR IN PART.

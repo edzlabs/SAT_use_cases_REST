@@ -39,7 +39,7 @@ module.exports = async function(sellerId, sellerCredentials, buyerId, buyerCrede
     });
 
     let isOk = so.id == cst.tradeStatuses.StatusOfferWritten.id;
-    debug("sell offer passed:%s", isOk);
+    debug("sell offer has been made:%s", isOk);
 
     if(!isOk) return false;
 
@@ -53,7 +53,7 @@ module.exports = async function(sellerId, sellerCredentials, buyerId, buyerCrede
     });
     isOk = bo.id == cst.tradeStatuses.StatusDealComplete.id;
 
-    debug("buy offer passed and deal has been made:%s", isOk);
+    debug("buy offer has been successful and deal has been made:%s", isOk);
 
     return isOk;
 };

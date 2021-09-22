@@ -10,8 +10,7 @@
  from COMPANY.  Access to the source code contained herein is hereby forbidden to anyone except current COMPANY employees, managers, contractors or partners who have executed 
  Confidentiality and Non-disclosure agreements explicitly covering such access.
  
- The copyright notice above does not evidence any actual or intended publication or disclosure  of  this source code, which includes  
- information that is confidential and/or proprietary, and is a trade secret, of  COMPANY.
+ The copyright notice above does not evidence any actual or intended publication or disclosure  of  this source code, which includes information that is confidential and/or proprietary, and is a trade secret, of  COMPANY.
  
  ANY REPRODUCTION, MODIFICATION, DISTRIBUTION, PUBLIC  PERFORMANCE, 
  OR PUBLIC DISPLAY OF OR THROUGH USE  OF THIS  SOURCE CODE  WITHOUT  THE EXPRESS WRITTEN CONSENT OF COMPANY IS STRICTLY PROHIBITED, AND IN VIOLATION OF APPLICABLE 

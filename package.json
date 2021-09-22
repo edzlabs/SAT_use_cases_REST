@@ -1,0 +1,15 @@
+{
+  "name": "sat-samples",
+  "version": "1.0.0",
+  "scripts": {
+    "start_rest": "DEBUG=sample_rest,list_sats,making_deal,get_ticket,download_file node ./scenario_sat_rest.js",
+    "start_rpc": "DEBUG=* node ./scenario_sat_rpc.js"
+  },
+  "dependencies": {
+    "dsd-common-lib": "3.2.10",
+    "dsd-client-conn-lib": "3.2.5",
+    "axios": "^0.21.1",
+    "debug": "~2.6.3",
+    "request": "^2.88.2"
+  }
+}

@@ -20,63 +20,43 @@
  * Created by tron on 20/09/2021.
  */
 
-
+const axios = require("axios");
 const debug = require("debug")("download_file");
-const cst = require('dsd-common-lib').Constants;
-const request = require('request');
+const cst = require("dsd-common-lib").Constants;
 
-function downloadFileFromVaultBySession(vaultUrl, sessionId) {
-    let url = (vaultUrl +
-    "/" + cst.VaultProtocol.cmd_download +
-    "?" + cst.VaultProtocol.param_sessionId + "=" + encodeURIComponent(sessionId));
+const downloadFileFromVaultBySession = async (vaultUrl, sessionId) => {
+    const url = (vaultUrl +
+        "/" + cst.VaultProtocol.cmd_download +
+        "?" + cst.VaultProtocol.param_sessionId +
+        "=" + encodeURIComponent(sessionId))
+        ;
 
     debug("downloadUrl:%s", url);
 
-    //just an example of the request.
-    //production client must download data, not just return success
-    return new Promise((resolve, reject) => {
-        request.get({url}, function (err, response, body) {
-            if (err) {
-                debug(`download failed: ${JSON.stringify(err)}`);
-
-                reject(err);
-                return;
-            }
-
-            let filelen = (""+body).length;
-            debug("downloaded filelen=%s from %s", filelen, vaultUrl);
-
-            //just return success if we can read a file
-            resolve(filelen > 1000);
-        });
-    });
+    const file = await axios.get(url);
+    return file;
 }
 
-function getSessionByTicket(ticket) {
-    let ticket64 = Buffer.from(JSON.stringify(ticket)).toString("base64");
-    let vaultReq = ticket.vaultUrl + '/' + cst.VaultProtocol.cmd_getsession + '?' + cst.VaultProtocol.param_ticket + '=' + ticket64;
+const getSessionByTicket = (ticket) => {
+    const ticket64 = Buffer.from(JSON.stringify(ticket)).toString("base64");
+
+    const vaultReq = ticket.vaultUrl +
+        "/" + cst.VaultProtocol.cmd_getsession +
+        "?" + cst.VaultProtocol.param_ticket +
+        "=" + ticket64
+        ;
+
     debug("vault request: %s", vaultReq);
 
-    return new Promise((resolve, reject) => {
-        request.get(vaultReq)
-            .on('response', function(response) {
-                debug("session_id=%s", response.headers[cst.VaultProtocol.hdr_sessionId]);
-                resolve(response.headers[cst.VaultProtocol.hdr_sessionId]);
-            })
-            .on('error', function(err) {
-                debug(new Error(err));
-                resolve(false);
-            })
-        ;
-    });
+    const response = await axios.get(vaultReq);
+    const sessionId = response.headers[cst.VaultProtocol.hdr_sessionId];
+    debug("session_id=%s", sessionId);
+    return sessionId;
 }
 
-module.exports = async function(ticket) {
-    let sessionId = await getSessionByTicket(ticket);
-    if(!sessionId) return false;
+module.exports = async function (ticket) {
+    const sessionId = await getSessionByTicket(ticket);
+    const downloaded = await downloadFileFromVaultBySession(ticket.vaultUrl, sessionId);
 
-    let downloaded = await downloadFileFromVaultBySession(ticket.vaultUrl, sessionId);
-    if(!downloaded) return false;
-
-    return true;
+    return downloaded;
 };

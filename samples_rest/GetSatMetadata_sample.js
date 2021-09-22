@@ -20,8 +20,9 @@
  * Created by tron on 20/09/2021.
  */
 
-const { pds } = require("./_pds");
+const api = require("./api");
 
-module.exports = async function(satIds) {
-    return await pds._get("tags",{queryOption: "by_ids", tagIds: satIds});
-};
+module.exports = async (satIds) => {
+    const response = await api.get(`/tags?queryOptions=by_ids&tagIds=${satIds.join(',')}`);
+    return response;
+}

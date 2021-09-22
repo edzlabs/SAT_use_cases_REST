@@ -23,18 +23,14 @@
 const debug = require("debug")("get_ticket");
 const crypto = require('dsd-common-lib').DsdCrypto;
 
-const { pds } = require("./_pds");
+const api = require("./api");
 
-module.exports = async function(userId, prvKey, publicKey, dabId, satId) {
-    const argsBuyerSignature = crypto.signData({ dabId, buyerId: userId, satId}, prvKey);
+module.exports = async (userId, prvKey, publicKey, dabId, satId) => {
+    const argsBuyerSignature = crypto.signData({ dabId, buyerId: userId, satId }, prvKey);
     debug("signature:%s", argsBuyerSignature);
-    let ticket = await pds._get("tokens", {accessType: "SAT", dabId, userId, satId, argsBuyerSignature, publicKey});
+    const ticket = await api.get(
+        `/tokens?accessType=SAT&dabId=${dabId}&userId=${userId}&satId=${satId}&argsBuyerSignature=${argsBuyerSignature}&publicKey=${publicKey}`
+    );
     debug("ticket: %o", ticket);
     return ticket;
-
-
-    // const argsBuyerSignature = crypto.signData({dabId, satId, buyerId}, prvKey);
-    // debug("signature:%s", argsBuyerSignature);
-    // let ticket = await pds.getSatAccessTicket({dabId, satId, buyerId, publicKey, argsBuyerSignature});
-
 };

@@ -21,58 +21,58 @@
 */
 
 const debug = require("debug")("list_sats");
-const cst = require('dsd-common-lib').Constants;
+const cst = require("dsd-common-lib").Constants;
 
-const { pds } = require("./_pds");
+const api = require("./api");
 
-module.exports = async function(userId, pos, size) {
+module.exports = async (userId, pos, size) => {
+    const tradeType = cst.tradeTypes.TradeBuy.name.toUpperCase();
+    const dabType = cst.dabTypes.DabTag.name.toUpperCase();
+    const licenseType = cst.licenseTypes.LicenseOwnership.name.toUpperCase();
+
     //1. get tags I own.
-    let deals = await pds._get("deals",{
-        userId,
-        tradeType: cst.tradeTypes.TradeBuy.name.toUpperCase(),
-        dabType: cst.dabTypes.DabTag.name.toUpperCase(),
-        licenseType: cst.licenseTypes.LicenseOwnership.name.toUpperCase()
-    });
+    const deals = await api.get(
+        `/deals?userId=${userId}&tradeType=${tradeType}&dabType=${dabType}&licenseType=${licenseType}`
+    );
     debug("total count of owned tags: %s", deals.totalCount);
 
-    let totalIds = [];
-    let limit = 50;
+    const totalIds = [];
+    const limit = 50;
 
-    for(let offset = 0; offset < deals.totalCount; offset += limit) {
-        let iterDeals = await pds._get("deals",{
-            userId,
-            tradeType: cst.tradeTypes.TradeBuy.name.toUpperCase(),
-            dabType: cst.dabTypes.DabTag.name.toUpperCase(),
-            licenseType: cst.licenseTypes.LicenseOwnership.name.toUpperCase(),
-            offset, limit
-        });
+    for (let offset = 0; offset < deals.totalCount; offset += limit) {
+        const iterDeals = await api.get(
+            `/deals?userId=${userId}&tradeType=${tradeType}&dabType=${dabType}&licenseType=${licenseType}&offset=${offset}&limit=${limit}`
+        );
         debug("getTradedDabsIds[%s]=>[%o,...]", offset, iterDeals.deals[0]);
 
         totalIds = [...totalIds, ...(iterDeals.deals.map(d => { return d.tagId }))];
     }
 
     debug("totalIds:%o", totalIds);
+
     //2. filter SATs from the tags
-    let sats = [];
+    const sats = [];
     let pos_i = 0;
     for (let i = 0; i < totalIds.length; i++) {
-        let satId = totalIds[i];
-        if(sats.length >= size)
+        const satId = totalIds[i];
+        if (sats.length >= size)
             break;
 
-        let dabIds = await pds._get("sats",{queryOption: "list", satId});
-        if(i%10 == 0) debug("sat %s -> dabs %o", satId, dabIds);
+        const dabIds = await api.get(`/sats?queryOption=list&satId=${satId}`);
 
-        if(dabIds.length > 0) {
-            pos_i ++;
+        if (i % 10 == 0) {
+            debug("sat %s -> dabs %o", satId, dabIds);
+        }
 
-            if(pos_i >= pos)
-                sats.push({satId, dabIds});
+        if (dabIds.length > 0) {
+            pos_i++;
+
+            if (pos_i >= pos) {
+                sats.push({ satId, dabIds });
+            }
         }
     }
 
     debug("filtered sats: %o", sats);
     return sats;
-
 };
-

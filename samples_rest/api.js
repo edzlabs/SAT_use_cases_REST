@@ -15,31 +15,15 @@
  * LAWS AND INTERNATIONAL TREATIES.  THE RECEIPT OR POSSESSION OF  THIS SOURCE CODE AND/OR RELATED INFORMATION DOES NOT CONVEY OR IMPLY ANY RIGHTS  
  * TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING THAT IT  MAY DESCRIBE, IN WHOLE OR IN PART.
  *
- * _pds.js
+ * api.js
  *                
  * Created by tron on 20/09/2021.
  */
 
 const cfg = require("../config.json");
-const axios = require('axios').create({baseURL: 'https://'+cfg.pdsHost+':8081', timeout: 60000});
+const axios = require("axios");
 
-async function _get(endpoint, params) {
-    let packed = "";
-    Object.keys(params).forEach((k, i) => { packed += (i == 0 ? "" : "&") + k + "=" + params[k] });
-    return (await axios.get('/api/' + endpoint + "?" + packed)).data;
-}
-
-function _post(endpoint, params) {
-    return new Promise((resolve, reject) => {
-        axios.post('/api/'+endpoint, params)
-            .then((resp) => {
-                resolve(resp.data);
-            })
-            .catch((err) => {
-                reject(err.response.data);
-            });
-    });
-}
-
-module.exports = { pds: {_get, _post} };
-
+module.exports = axios.create({
+    baseURL: `https://${cfg.pdsHost}:8081/api`,
+    timeout: 60000
+});

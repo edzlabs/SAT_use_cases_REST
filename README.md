@@ -7,7 +7,7 @@
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  
 ## Overview
-This repository contains sample Javascript code to help illustrate how to use the Serialized Asset Token (SAT) technology from Personal Digital Spaces (PDS) to create new user identities on the blockchain and then transfer pre-minted SATs to that user. Please note that these code examples are for illustrative purposes only. 
+This repository contains sample Javascript code to help illustrate how to use the Serialized Asset Token (SAT) technology from Personal Digital Spaces (PDS) to create a new user identity on the blockchain and then transfer pre-minted SATs to that user. Please note that these code examples are for illustrative purposes only. 
 
 The file scenario_sat_rest.js is the starting point and contains the overview of the scenario that is being used for the example. This scenario involves the following steps: Create buyer, give money to him, sell SAT to him, access the SAT.
 

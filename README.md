@@ -14,14 +14,15 @@ The file scenario_sat_rest.js is the starting point and contains the overview of
 The require components for this scenario are as follow:
 
 SELLER - credentials found in config.json
+
 FUNCTIONS:
-createUser    ./samples_rest/CreatingUser_sample
-sendMoney     ./samples_rest/SendingMoney_sample
-listSats      ./samples_rest/ListOwnedSATs_sample
-getSats       ./samples_rest/GetSatMetadata_sample
-sellOwnership ./samples_rest/SellOwnership_sample
-getTicket     ./samples_rest/GetViewingTicket_sample
-downloadFile  ./samples_rest/DownloadFile_sample
+* createUser    ./samples_rest/CreatingUser_sample
+* sendMoney     ./samples_rest/SendingMoney_sample
+* listSats      ./samples_rest/ListOwnedSATs_sample
+* getSats       ./samples_rest/GetSatMetadata_sample
+* sellOwnership ./samples_rest/SellOwnership_sample
+* getTicket     ./samples_rest/GetViewingTicket_sample
+* downloadFile  ./samples_rest/DownloadFile_sample
 
 ## Notes:
 * The blockchain ID and credentials in the config.json are for illustrative purposes only. Please insert your own data in this file (to replace the sample data) in order to enable the sample code to work.

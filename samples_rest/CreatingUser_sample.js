@@ -20,8 +20,8 @@
  * Created by tron on 20/09/2021.
  */
 
-const { pds } = require("./_pds");
+const api = require("./api");
 
-module.exports = async function() {
-    return await pds._post("users/create",{});
+module.exports = async () => {
+    return await api.post("/users/create");
 };

@@ -23,12 +23,12 @@
 const debug = require("debug")("making_deal");
 const cst = require('dsd-common-lib').Constants;
 
-const { pds } = require("./_pds");
+const api = require("./api");
 
-module.exports = async function(sellerId, sellerCredentials, buyerId, buyerCredentials, dabId, priceInLeos) {
-    let licenseType = cst.licenseTypes.LicenseOwnership.name.toUpperCase();
+module.exports = async (sellerId, sellerCredentials, buyerId, buyerCredentials, dabId, priceInLeos) => {
+    const licenseType = cst.licenseTypes.LicenseOwnership.name.toUpperCase();
 
-    let so = await pds._post("offers/create", {
+    const so = await api.post("/offers/create", {
         tradeType: cst.tradeTypes.TradeSell.name.toUpperCase(),
         licenseType,
         sellerId,
@@ -38,12 +38,14 @@ module.exports = async function(sellerId, sellerCredentials, buyerId, buyerCrede
         minLeosPrice: priceInLeos
     });
 
-    let isOk = so.id == cst.tradeStatuses.StatusOfferWritten.id;
-    debug("sell offer has been made:%s", isOk);
+    const isSoOk = so.id == cst.tradeStatuses.StatusOfferWritten.id;
+    debug("sell offer has been made:%s", isSoOk);
 
-    if(!isOk) return false;
+    if (!isSoOk) {
+        return false;
+    }
 
-    let bo = await pds._post("offers/create", {
+    const bo = await api.post("/offers/create", {
         tradeType: cst.tradeTypes.TradeBuy.name.toUpperCase(),
         licenseType,
         buyerCredentials,
@@ -51,10 +53,10 @@ module.exports = async function(sellerId, sellerCredentials, buyerId, buyerCrede
         assetId: dabId,
         maxLeosPrice: priceInLeos,
     });
-    isOk = bo.id == cst.tradeStatuses.StatusDealComplete.id;
 
-    debug("buy offer has been successful and deal has been made:%s", isOk);
+    const isBoOk = bo.id == cst.tradeStatuses.StatusDealComplete.id;
+    debug("buy offer has been successful and deal has been made:%s", isBoOk);
 
-    return isOk;
+    return isBoOk;
 };
 

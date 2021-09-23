@@ -22,10 +22,10 @@
 
 const cst = require('dsd-common-lib').Constants;
 
-const { pds } = require("./_pds");
+const api = require("./api");
 
-module.exports = async function(senderId, senderCredentials, receiverId, currencyAmount) {
-    return await pds._post("balances/transfer", {
+module.exports = async (senderId, senderCredentials, receiverId, currencyAmount) => {
+    return await api.post("/balances/transfer", {
         senderCurrency: cst.currencyTypes.CurrencySilver.name.toUpperCase(),
         receiverCurrency: cst.currencyTypes.CurrencySilver.name.toUpperCase(),
         senderId,
